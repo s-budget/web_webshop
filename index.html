@@ -1,0 +1,83 @@
+
+<!doctype html>
+<html>
+  <head 
+  >
+    <title>Tools.CO webshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles/index.css">
+  </head>
+  <body>
+    <div class="header">
+      <a href="index.html" class="logo">
+      <img src="/images/web_logo.png"   height="50">
+      </a>
+      <div class="header-right">
+        <a href="cart.html" class="cart">
+          <img src="/images/shopingcart.png"   height="50">
+        </a>
+        <a class="active" >Ime kategorije</a> 
+        <a class="search">
+          <img src="/images/searchButton.png"   height="50">
+        </a>
+      </div>
+     </div> 
+
+     <div class="Content">
+
+     <div class="lijevo">
+      <div class="kategorije" id="bob">
+      <script type="module">
+        import {data} from '/scripts/data.js' ;
+       for(var i = 0; i < data.categories.length;i++){
+        var parent=document.getElementById("bob");
+        var child = document.createElement("button");
+        child.id=i;
+        var div=document.createElement("div");
+        child.innerHTML = data.categories[i].name;
+        child.addEventListener('click',function fillDesnoDolje(event){
+          console.log(event.target.id);
+         var dd=document.getElementById("bob2");
+         console.log(data.categories[event.target.id].products.length);
+          for(var j=0;j<data.categories[event.target.id].products.length;j++)
+          {
+            var bdiv=document.createElement("div");
+            bdiv.className="productSpace";
+            var idiv=document.createElement("div");
+            bdiv.appendChild(idiv);
+            var img=document.createElement("img");
+            img.src="/images/"+data.categories[event.target.id].products[j].image;
+            idiv.appendChild(img);
+            var tdiv=document.createElement("div");
+            tdiv.innerText=data.categories[event.target.id].products[j].name;
+            bdiv.appendChild(tdiv);
+            dd.appendChild(bdiv);
+          }
+        })
+        div.appendChild(child);
+        parent.appendChild(div);}
+      </Script>
+
+      </div>
+      <div class="PR-stuff">
+        <div> <a class="link">Kontakt</a></div>
+        <div> <a class="link">Newsletter</a></div>
+        <div> <a class="link">Pretplati se</a></div>
+
+      </div>
+
+     </div>
+
+     <div class="desno-gore">
+    <img src="images/nicePhoto.jpg" height="300px" width="100%">
+     </div>
+     <div class="desno-dolje" id="bob2">
+
+     </div>
+
+
+
+
+     </div>
+    
+</html>
