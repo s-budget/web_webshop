@@ -144,13 +144,13 @@
     float: none;
   }
   .Content .lijevo{
-    background-color: blue;
+    background-color: rgb(141, 58, 58);
     grid-row-start: 2;
     grid-row-end: 3;
     grid-column-start: 1;
     grid-column-end: 2;}
   .Content .desno-gore{
-    background-color: navy;
+    background-color: #bb6060;;
     grid-row-start: 1;
     grid-row-end: 2;
     grid-column-start: 1;
