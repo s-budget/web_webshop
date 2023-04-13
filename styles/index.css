@@ -1,10 +1,15 @@
 
-
+body{
+  font-size: 150%;
+  background-image: url("/images/background.jpg");
+}
 /* Style the header with a grey background and some padding */
 .header {
+
   overflow: hidden;
-  background-color: #bb6060;
-  padding: 20px 10px;
+  background-color: rgba(99, 36, 36, 0.75);
+  align-content: center;
+  align-items: center;
 }
 
 /* Style the header links */
@@ -20,10 +25,11 @@
 }
 
 /* Style the logo link (notice that we set the same value of line-height and font-size to prevent the header to increase when the font gets bigger */
-.header a.logo {
+.header a.logo img{
   font-size: 25px;
   font-weight: bold;
-  width: 220px;
+  width: 500px;
+  height: 150px;
 }
 
 /* Change the background color on mouse-over */
@@ -34,7 +40,7 @@
 
 /* Style the active/current link*/
 .header a.active {
-  background-color: #bb6060;
+  background-color: rgba(99, 36, 36, 0);
   color: balck;
   
 }
@@ -48,17 +54,34 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
+  align-content: center;
+  height: 150px;
+  margin-top: 15.25px;
+}
+.header-right .active div {
+ font-size: 200%;
+}
+.header-right .cart .cartPhoto{
+  position: relative;
+}
+.header-right .cart .cartPhoto .cartNum{
+  position: absolute;
+  top:38px;
+  left:40px;
+  color: rgb(255, 255, 255);
+  font-size: 220%;
+  font-weight: 800;
 }
 
 .Content {
   display: grid;
-  display: grid;
-  grid-template-columns: 220px;
-  grid-template-rows: auto;
+  grid-template-columns: 300px;
+  grid-template-rows: 25vh;
+  height: 100vh;
 }
 
 .Content .lijevo{
-  background-color: rgb(141, 58, 58);
+  background-color: rgba(99, 36, 36, 0.75);
   grid-row-start: 1;
   grid-row-end: 3;
   grid-column-start: 1;
@@ -66,17 +89,28 @@
   display: grid;
   grid-template-columns: 100%;
   grid-template-rows: auto;
-
+  height:min-content;
 }
 .Content .desno-gore{
-  background-color: #bb6060;
   grid-row-start: 1;
   grid-row-end: 2;
   grid-column-start: 2;
   grid-column-end: 3;
+  position: relative;
+}
+.Content .desno-gore img{
+  height: 100%;
+}
+.Content .desno-gore .top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+  font-size: 350%;
+  font-weight: 900;
+  color: #c23308;
+  
 }
 .Content .desno-dolje{
-  background-color: magenta;
   grid-row-start: 2;
   grid-row-end: 3;
   grid-column-start: 2;
@@ -87,15 +121,21 @@
   row-gap: 20px;
   column-gap: 20px;
   justify-content: flex-start;
+  align-content: flex-start;
 }
 
 .Content .lijevo .PR-stuff{
+  opacity: 100%;
   grid-row-start: 2;
   grid-row-end: 3;
   display: flexbox;
   flex-direction: column;
+  height: 200px;
+  
+
 }
 .Content .lijevo .PR-stuff div{
+  margin-top: 30px;
   text-align: center;
 }
 .Content .lijevo .PR-stuff div a:hover {
@@ -103,33 +143,77 @@
   color: black;
 }
 .Content .lijevo .kategorije{
+  opacity: 100%;
   grid-column-start: 1;
   grid-column-end: 2;
-  display: flexbox;
+  display: flex;
   flex-direction: column;
   align-items: center;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  row-gap: 20px;
+  column-gap: 20px;
+  height:min-content;
 }
 
 .Content .lijevo .kategorije div{
   text-align: center;
+  width: 50%;
+}
+.Content .lijevo .kategorije div button{
+  text-align: center;
+  font-size: 100%;
+  width: 100%;
 }
 .Content .desno-dolje .productSpace{
-  background-color: #ddd;
+  background-color: #dddddd70;
   width: 200px;
   height: 300px;
   margin-left: 20px;
   margin-right: 20px;
   margin-top: 20px;
-  margin-bottom: 20px;
+}
+.Content .desno-dolje .productSpace:hover div  .hiddenCart{
+
+  opacity: 100;
+}
+.Content .desno-dolje .productSpace div  .hiddenCart{
+  position: absolute;
+  opacity: 0;
+  width: 100px;
+  height: 100px;
+  top: 50px;
+  left: 50px;
+}
+.Content .desno-dolje .productSpace div  .productNum{
+  position: absolute;
+  width:min-content ;
+  height: min-content;
+  top: 165px;
+  left: 10px;
+  text-align: left;
+  color: white;
+  font-weight: 800;
+  font-size: 20;
+  background-color: red;
 }
 .Content .desno-dolje .productSpace div img{
+  
   width: 200px;
   height: 200px;
   
 }
 .Content .desno-dolje .productSpace div{
+  position: relative;
   text-align: center;
-  height: auto;
+  align-items: center;
+  
+}
+.Content .desno-dolje .productSpace .t{
+  position: relative;
+  text-align: center;
+  align-self: center;
+  height: 100px;
   
 }
 
@@ -140,24 +224,28 @@
     display: block;
     text-align: left;
   }
+  .header a.logo {
+    width: 524px;
+  }
   .header-right {
-    float: none;
+    float: left;
+    display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+      margin-left: 50px;
   }
   .Content .lijevo{
-    background-color: rgb(141, 58, 58);
     grid-row-start: 2;
     grid-row-end: 3;
     grid-column-start: 1;
     grid-column-end: 2;}
   .Content .desno-gore{
-    background-color: #bb6060;;
     grid-row-start: 1;
     grid-row-end: 2;
     grid-column-start: 1;
     grid-column-end: 3;
   }
   .Content .desno-dolje{
-    background-color: magenta;
     grid-row-start: 2;
     grid-row-end: 3;
     grid-column-start: 2;

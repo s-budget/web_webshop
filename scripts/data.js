@@ -24,10 +24,10 @@ export const data = {
             "image" : "sjekira 60.jpg",
             "products" : [
                 { 
-                    "name" : "sjekira drvo 60cm", "image" : "sjekira 60.jpg"
+                    "name" : "sjekira drvena 60cm", "image" : "sjekira 60.jpg"
                 },
                 { 
-                    "name" : "sjekira drvo 120cm", "image" : "sjekira 120.jpg"
+                    "name" : "sjekira drvena 120cm", "image" : "sjekira 120.jpg"
                 },{ 
                     "name" : "djetlo set 3kom", "image" : "dijetlo set.jpg"
                 },{ 
@@ -126,14 +126,14 @@ export const data = {
             "image" : "izolir traka.jpg",
             "products" : [
                 { 
-                    "name" : "traka za izoliranje električnih instalacija 3m", "image" : "izolir traka.jpg"
+                    "name" : "izolir traka 3m", "image" : "izolir traka.jpg"
                 },
                 { 
                     "name" : "vatrootporno ljepilo150mL", "image" : "vatrootporno ljepilo.jpg"
                 },{ 
                     "name" : "ljepilo za linoleum 3L", "image" : "ljepilo za linoleum.jpg"
                 },{ 
-                    "name" : "mekane naljepnice za namještaj 15kom", "image" : "mekane naljepnice za namjestaj.jpg"
+                    "name" : "mekane zaštitne naljepnice 15kom", "image" : "mekane naljepnice za namjestaj.jpg"
                 },{ 
                     "name" : "ducktape 5m", "image" : "ducktape.jpg"
                 }
@@ -146,7 +146,7 @@ export const data = {
                     "name" : "metalne grablje", "image" : "grablje metalne.jpg"
                 },
                 { 
-                    "name" : "drvene grablje", "image" : "grablje drvene.jpg"
+                    "name" : "drvene grablje", "image" : "grablje drvene.jpeg"
                 },{ 
                     "name" : "plastična lopata za snijeg", "image" : "lopata za snijeg plasticna.jpg"
                 },{ 

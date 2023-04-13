@@ -13,12 +13,15 @@
       <img src="/images/web_logo.png"   height="50">
       </a>
       <div class="header-right">
+        <a class="active" id="imeKat" ></a> 
         <a href="cart.html" class="cart">
-          <img src="/images/shopingcart.png"   height="50">
+          <div class="cartPhoto" id="cartPhoto">
+          <img src="/images/shopingcart.png"   height="100">
+          <div class="cartNum" id="cartNum">-1</div>
+        </div>
         </a>
-        <a class="active" >Ime kategorije</a> 
         <a class="search">
-          <img src="/images/searchButton.png"   height="50">
+          <img src="/images/searchButton.png"   height="100">
         </a>
       </div>
      </div> 
@@ -29,6 +32,22 @@
       <div class="kategorije" id="bob">
       <script type="module">
         import {data} from '/scripts/data.js' ;
+        var kosaricaObjekt = JSON.parse(localStorage.getItem('kosarica'));
+        var kosNum=document.getElementById("cartNum");
+        if(kosaricaObjekt==null || kosaricaObjekt["totalAmount"]==0)
+        {
+          kosaricaObjekt={};
+          kosaricaObjekt["totalAmount"]=0;
+          kosNum.innerText="";
+          localStorage.setItem('kosarica', JSON.stringify(kosaricaObjekt));
+        }
+        else
+        {
+
+          kosNum.innerText=kosaricaObjekt["totalAmount"];
+        }
+       
+
        for(var i = 0; i < data.categories.length;i++){
         var parent=document.getElementById("bob");
         var child = document.createElement("button");
@@ -36,22 +55,94 @@
         var div=document.createElement("div");
         child.innerHTML = data.categories[i].name;
         child.addEventListener('click',function fillDesnoDolje(event){
-          console.log(event.target.id);
          var dd=document.getElementById("bob2");
-         console.log(data.categories[event.target.id].products.length);
+        // console.log(data.categories[event.target.id].products.length);
+        //console.log(dd.firstChild);
+        while(dd.firstChild!=null)
+        {
+            dd.removeChild(dd.firstChild);
+        }
+        //console.log(dd.firstChild);
+        var imeK=document.getElementById("imeKat");
+        while(imeK.firstChild!=null)
+        {
+          imeK.removeChild(imeK.firstChild);
+        }
+        var ime=document.createElement("div")
+        ime.innerText=("  "+data.categories[event.target.id].name);
+        imeK.appendChild(ime);
           for(var j=0;j<data.categories[event.target.id].products.length;j++)
           {
             var bdiv=document.createElement("div");
             bdiv.className="productSpace";
+            bdiv.id=event.target.id+" "+j;
             var idiv=document.createElement("div");
             bdiv.appendChild(idiv);
             var img=document.createElement("img");
+            img.id="i";
             img.src="/images/"+data.categories[event.target.id].products[j].image;
             idiv.appendChild(img);
+            var img2=document.createElement("img")
+            img2.src="/images/orangecart.png";
+            img2.className="hiddenCart";
+            img2.id="c";
+            var num =document.createElement("div");
+            if(typeof kosaricaObjekt[bdiv.id]=="undefined" || kosaricaObjekt[bdiv.id]==0)
+            {
+              num.innerText="";
+            }
+            else
+            {
+              num.innerText=kosaricaObjekt[bdiv.id];
+            }
+            num.className="productNum";
+            idiv.appendChild(num);
+            
+            idiv.appendChild(img2);
             var tdiv=document.createElement("div");
             tdiv.innerText=data.categories[event.target.id].products[j].name;
+            tdiv.id="t";
             bdiv.appendChild(tdiv);
             dd.appendChild(bdiv);
+
+            bdiv.addEventListener("click",function addProduct(event2)
+            {
+              var produkt;
+              
+              if(event2.target.id=="t")
+              {
+                return;
+                  produkt=event2.target.parentElement.id;
+              }else if(event2.target.id=="c" || event2.target.id=="i")
+              {
+                produkt=event2.target.parentElement.parentElement.id;
+              
+              }
+              else
+              {
+                return;
+              }
+              
+
+              console.log(produkt);
+              kosaricaObjekt = JSON.parse(localStorage.getItem('kosarica'));
+              kosaricaObjekt["totalAmount"]=kosaricaObjekt["totalAmount"]+1;
+              var kosNum=document.getElementById("cartNum");
+               kosNum.innerText=kosaricaObjekt["totalAmount"];
+               var produktdiv=document.getElementById(produkt);
+               //console.log(produktdiv.firstChild.children[1]);
+              if(typeof kosaricaObjekt[produkt]=="undefined")
+            {
+              produktdiv.firstChild.children[1].innerText=1;
+              kosaricaObjekt[produkt]=1;
+            }
+            else
+            {
+              produktdiv.firstChild.children[1].innerText=kosaricaObjekt[produkt]+1;
+              kosaricaObjekt[produkt]=kosaricaObjekt[produkt]+1;
+            }
+            localStorage.setItem('kosarica', JSON.stringify(kosaricaObjekt));
+            })
           }
         })
         div.appendChild(child);
@@ -68,12 +159,8 @@
 
      </div>
 
-     <div class="desno-gore">
-    <img src="images/nicePhoto.jpg" height="300px" width="100%">
-     </div>
-     <div class="desno-dolje" id="bob2">
-
-     </div>
+     <div class="desno-gore"><img src="images/nicePhoto.jpg" height="310px" width="100%"><label class="top-left">Dobrodošli!</label></div>
+     <div class="desno-dolje" id="bob2"></div>
 
 
 

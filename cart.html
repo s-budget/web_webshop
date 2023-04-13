@@ -3,19 +3,142 @@
 <html>
   <head>
     <title>Tools.CO webshop</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="styles/cart.css">
   </head>
   <body>
     <div class="header">
-     <a href="index.html" class="logo">
-     <img src="/images/web_logo.png"   height="50">
-     </a>
-     <div class="Shoping cart name">
-      <h2>
-        My shoping cart
-      </h2>   
-     </div>
-      <a href="cart.html" class="cart">
-        <img src="/images/shopingcart.png"   height="50">
+      <a href="index.html" class="logo">
+      <img src="/images/web_logo.png"   height="50">
       </a>
-    </div> 
+      <div class="header-right">
+        <a class="active" id="imeKat" ><div>Moja košarica</div></a> 
+        <a href="cart.html" class="cart">
+          <div class="cartPhoto" id="cartPhoto">
+          <img src="/images/shopingcart.png"   height="100">
+          <div class="cartNum" id="cartNum">-1</div>
+        </div>
+        </a>
+        <a class="search">
+          <img src="/images/searchButton.png"   height="100">
+        </a>
+      </div>
+     </div> 
+     <div class="kosarica">
+        <div class="lista" id="lista">
+          <div class="naziviStupca">
+            <div class="lijevo">Naziv Proizvoda</div>
+            <div class="desno">Količina</div>
+          </div>
+        </div>
+     </div>
+     <script type="module">
+      import {data} from '/scripts/data.js' ;
+      var kosaricaObjekt = JSON.parse(localStorage.getItem('kosarica'));
+      var kosNum=document.getElementById("cartNum");
+      if(kosaricaObjekt==null || kosaricaObjekt["totalAmount"]==0)
+      {
+        kosaricaObjekt={};
+        kosaricaObjekt["totalAmount"]=0;
+        kosNum.innerText="";
+        localStorage.setItem('kosarica', JSON.stringify(kosaricaObjekt));
+      }
+      else
+      {
+        kosNum.innerText=kosaricaObjekt["totalAmount"];
+      }
+      for( const key in kosaricaObjekt)
+        {
+
+          console.log(key)
+          if(key=="totalAmount" ||kosaricaObjekt[key]==0)
+          {
+            continue;
+          }
+          var list=document.getElementById("lista")
+          var red=document.createElement("div");
+          red.className="red";
+          red.id=key;
+          var naziv=document.createElement("div");
+          naziv.className="lijevo";
+         
+          naziv.innerText=data.categories[key.split(" ")[0]].products[key.split(" ")[1]].name;
+          var kolicina=document.createElement("div");
+          kolicina.className="desno"
+         
+          var minus=document.createElement("div");
+          minus.className="minus";
+          var minusP=document.createElement("img");
+          minusP.src="/images/minus.png";
+          minusP.id="-"+key;
+
+          minusP.addEventListener("click",function addProduct(event)
+{              
+              kosaricaObjekt = JSON.parse(localStorage.getItem('kosarica'));
+              kosaricaObjekt["totalAmount"]=kosaricaObjekt["totalAmount"]-1;
+              var kosNum=document.getElementById("cartNum");
+              kosNum.innerText=kosaricaObjekt["totalAmount"];
+
+              if(kosaricaObjekt["totalAmount"]==0)
+              {
+                kosNum.innerText="";
+              }
+
+              var brojP=document.getElementById("#"+event.target.id.split("-")[1]);
+              kosaricaObjekt[event.target.id.split("-")[1]]=kosaricaObjekt[event.target.id.split("-")[1]]-1;
+              brojP.innerText=kosaricaObjekt[event.target.id.split("-")[1]];
+
+              if(kosaricaObjekt[event.target.id.split("-")[1]]==0)
+              {
+                var list=document.getElementById("lista");
+                var red=document.getElementById(event.target.id.split("-")[1]);
+                console.log(red);
+                list.removeChild(red);
+              }
+
+              localStorage.setItem('kosarica', JSON.stringify(kosaricaObjekt));
+              
+}
+);
+
+          minus.appendChild(minusP);
+          var broj=document.createElement("div");
+          broj.className="broj";
+          broj.id="#"+key;
+          broj.innerText=kosaricaObjekt[key];
+          var plus=document.createElement("div");
+          plus.className="plus";
+          var plusP=document.createElement("img");
+          plusP.src="/images/plus.png";
+          plusP.id="+"+key;
+
+plusP.addEventListener("click",function addProduct(event)
+{
+              kosaricaObjekt = JSON.parse(localStorage.getItem('kosarica'));
+              kosaricaObjekt["totalAmount"]=kosaricaObjekt["totalAmount"]+1;
+              var kosNum=document.getElementById("cartNum");
+              kosNum.innerText=kosaricaObjekt["totalAmount"];
+
+              var brojP=document.getElementById("#"+event.target.id.split("+")[1]);
+              kosaricaObjekt[event.target.id.split("+")[1]]=kosaricaObjekt[event.target.id.split("+")[1]]+1;
+              brojP.innerText=kosaricaObjekt[event.target.id.split("+")[1]];
+              localStorage.setItem('kosarica', JSON.stringify(kosaricaObjekt));
+              
+}
+);
+
+
+          plus.appendChild(plusP);
+          kolicina.appendChild(minus);
+          kolicina.appendChild(broj);
+          kolicina.appendChild(plus);
+          
+          red.appendChild(naziv);
+          red.appendChild(kolicina);
+          lista.appendChild(red);
+
+        }
+      
+</Script>
+
 </html>
